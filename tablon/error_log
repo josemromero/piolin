@@ -1,2 +1,0 @@
-[17-Dec-2013 02:31:56] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/josecaos/public_html/tablon/index.php:8) in /home/josecaos/public_html/comunes/comunes.php on line 13
-[17-Dec-2013 04:36:01] PHP Warning:  pg_query() [<a href='function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at or near &quot;de&quot; at character 89 in /home/josecaos/public_html/tablon/index.php on line 27
