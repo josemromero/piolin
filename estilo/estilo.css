@@ -1,0 +1,23 @@
+#pios
+{
+    width: 600px;
+    
+}
+
+#seguidos
+{
+    width: 100px;
+    float: right;
+}
+
+#pios
+{
+    border: 2px solid black;
+    width: 50%;
+    margin: 5px;
+}
+
+#pio
+{
+    
+}
