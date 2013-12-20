@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -21,32 +22,32 @@
                 $contr = $_POST['rcont'];
                 $email = $_POST['email'];
                 
-                if ($cont == $contr)
+                $errores = comprobar_formulario($usuario, $email, $cont, $contr);
+                
+                if ($errores[3] == 0)
                 {
                 $res = pg_query($con, "insert into usuarios (usuario, pass, email)
             	                        values ('$usuario', md5('$cont'), '$email')");
-            	}
-            	else
-            	{ ?>
-            	    <p>Las contrase«Ğas no coinciden</p><?php
             	}
             }
             else
             {
                 $usuario = $email = $cont = "";
+                $errores = array("", "", "");
             }
         
+            ob_end_flush();
         ?>
     
         <form action="registro.php" method="post">
             <label for="usuario">Usuario*: </label>
-            <input type="text" name="usuario" value="<?= $usuario ?>"/><br/>
+            <input type="text" name="usuario" value="<?= $usuario ?>"/><?= $errores[0] ?><br/>
             <label for="email">E-mail*: </label>
-            <input type="email" name="email" value="<?= $email ?>" /><br/>
+            <input type="email" name="email" value="<?= $email ?>" /><?= $errores[1] ?><br/>
             <label for="cont">ContraseÃ±a*: </label>
             <input type="password" name="cont" value="<?= $cont ?>" /><br/>
             <label for="rcont">Repetir contraseÃ±a*: </label>
-            <input type="password" name="rcont" /><br/>
+            <input type="password" name="rcont" /><?= $errores[3] ?><br/>
             <input type="submit" value="Registrar" />
         </form>
             

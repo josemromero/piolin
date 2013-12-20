@@ -36,8 +36,83 @@
         <p align="right">Sigues a: <?= $seguidos ?> | Te siguen: <?= $seguidores ?></p>
         <hr/><?php
         
-        pg_close();
+        pg_close($con);
     }
 
+
+
+    // VALIDACIONES DE FORMULARIO DE REGISTRO DE USUARIO
+    
+    function comprobar_usuario_valido($usuario)
+    {
+        $con = conectar();
+        
+        $res = pg_query($con, "select * from usuarios where usuario = '$usuario'");
+        
+        $num_rows = pg_num_rows($res);
+        
+        if ($num_rows != 0)
+        {
+            return "<p style='color:red;'>Usuario no válido</p>";
+        }
+        else
+        {
+            return "";
+        }
+        
+        pg_close($con);
+    }
+    
+    function comprobar_email_valido($email)
+    {
+        $con = conectar();
+        
+        $res = pg_query($con, "select * from usuarios where email = '$email'");
+        
+        $num_rows = pg_num_rows($res);
+        
+        if ($num_rows != 0)
+        {
+            return "<p style='color:red;'>Email no válido</p>";
+        }
+        else
+        {
+            return "";
+        }
+                
+        pg_close($con);
+    }
+
+    function comprobar_cont_valida($cont, $contr)
+    {
+        if (strcmp($cont, $contr) != 0)
+        {
+            return "<p style='color:red;'>Las contraseñas no coinciden</p>";
+        }
+        else
+        {
+            return "";
+        }
+    }
+    
+    function comprobar_formulario($usuario, $email, $cont, $contr)
+    {
+        $error_usuario = comprobar_usuario_valido($usuario);
+        $error_email = comprobar_email_valido($email);
+        $error_cont = comprobar_cont_valida($cont, $contr);
+        $contador = 0;  // Contador de caracteres
+        
+        $errores = array ($error_usuario, $error_email, $error_cont);
+        
+        for ($i = 0; $i < count($errores); $i++)
+        {
+            $contador += strlen($errores[$i]);
+        }
+        
+        $errores[] = $contador;
+        
+        return $errores;
+        
+    }
 
 ?>
