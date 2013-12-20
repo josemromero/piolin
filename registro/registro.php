@@ -47,7 +47,7 @@
             <label for="cont">Contraseña*: </label>
             <input type="password" name="cont" value="<?= $cont ?>" /><br/>
             <label for="rcont">Repetir contraseña*: </label>
-            <input type="password" name="rcont" /><?= $errores[3] ?><br/>
+            <input type="password" name="rcont" /><?= $errores[2] ?><br/>
             <input type="submit" value="Registrar" />
         </form>
             
