@@ -85,7 +85,7 @@
 
     function comprobar_cont_valida($cont, $contr)
     {
-        if (strcmp($cont, $contr) != 0)
+        if ($cont != $contr)
         {
             return "<p style='color:red;'>Las contraseñas no coinciden</p>";
         }
