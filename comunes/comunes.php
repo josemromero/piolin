@@ -33,7 +33,7 @@
                                 where seguido_id = (select id from usuarios where usuario = '$usuario')");
         $seguidores = pg_num_rows($res); ?>
         
-        <p align="right">Sigues a: <?= $seguidos ?> | Te siguen: <?= $seguidores ?></p>
+        <p align="right">Sigues a: <a href="../tablon/seguidos.php"><?= $seguidos ?></a> | Te siguen: <a href="../tablon/seguidores.php"><?= $seguidores ?></a></p>
         <hr/><?php
         
         pg_close($con);
@@ -85,7 +85,7 @@
 
     function comprobar_cont_valida($cont, $contr)
     {
-        if ($cont != $contr)
+        if (strcmp($cont, $contr) != 0)
         {
             return "<p style='color:red;'>Las contraseñas no coinciden</p>";
         }

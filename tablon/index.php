@@ -68,10 +68,21 @@
                     <?= $fecha ?>
                     <br/><br/>
                     <?php
-                }
+                } ?>
+                </div> <?php
             }
             else
             { ?>
+                <h1 align="center">TIMELINE</h1>
+                <h2 align="center"><?= $usuario ?></h2> 
+                <br/><br/>
+                <div align="center" id="pio"></div>
+                    <form action="index.php" method="post" >
+                        <textarea maxlength="140" rows="4" cols="40" name="piar" ></textarea><br/>
+                        <input type="submit" value="Enviar" />
+                    </form>
+                </div>
+                <br/><br/>
                 <p>Aún no tienes pios propios!</p> <?php
             } 
             

@@ -18,7 +18,7 @@
                 $con = conectar();
                 
                 $usuario = $_POST["usuario"];
-                $cont = $_POST['password'];
+                $cont = $_POST['cont'];
                 $contr = $_POST['rcont'];
                 $email = $_POST['email'];
                 
@@ -28,6 +28,7 @@
                 {
                 $res = pg_query($con, "insert into usuarios (usuario, pass, email)
             	                        values ('$usuario', md5('$cont'), '$email')");
+                header("Location: ../index.php");
             	}
             }
             else
