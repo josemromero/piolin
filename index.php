@@ -30,6 +30,8 @@
                 if ($num_rows > 0)
                 {
                     $_SESSION['usuario'] = $usuario;
+                    $fila = pg_fetch_array($res, 0);
+                    $_SESSION['usuario_id'] = $fila['id'];
                     header("Location: tablon/index.php");
                 }
                 else
@@ -54,7 +56,7 @@
             <input type="submit" value="loggin" />
         </form>
         <br/><br/>
-        <a href="registro/registro.php">Hazte una cuenta</a>
+        <a href="usuarios/registro.php">Hazte una cuenta</a>
         
     </body>
     

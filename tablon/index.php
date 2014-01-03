@@ -18,19 +18,27 @@
             
             $con = conectar();
             $usuario = $_SESSION['usuario'];
+            $id = $_SESSION['usuario_id'];
             
-            $res = pg_query($con, "select id
-                                    from usuarios
-                                    where usuario = '$usuario'");
-            $fila =pg_fetch_array($res, 0);
-            $id = $fila['id'];
-            
-            if (count($_POST) != 0)
+            if (isset($_POST['piar']))
             {
-            	$pio = $_POST['piar'];
+            	$pio = trim($_POST['piar']);
             	
             	$res = pg_query($con, "insert into pios (pio, usuarios_id)
             	                        values ('$pio', $id)");
+            }
+            
+            if (isset($_GET['usuario']))
+            {
+                $usuario = trim($_GET['usuario']);
+                
+                $res = pg_query($con, "select * from usuarios where usuario = '$usuario'");
+                
+                if (pg_num_rows($res) > 0)
+                {
+                    $fila = pg_fetch_array($res);
+                    $id = $fila['id'];
+                }
             }
             
             $res =pg_query($con, "select usuario, pio, fecha from pios_usuarios_v
@@ -46,13 +54,17 @@
             { ?>
                 <h1 align="center">TIMELINE</h1>
                 <h2 align="center"><?= $usuario ?></h2> 
-                <br/><br/>
+                <br/><br/> <?php
+                
+                if ($id == $_SESSION['usuario_id'])
+                { ?>          
                 <div align="center" id="pio"></div>
                     <form action="index.php" method="post" >
                         <textarea maxlength="140" rows="4" cols="40" name="piar" ></textarea><br/>
                         <input type="submit" value="Enviar" />
                     </form>
-                </div>
+                </div> <?php
+                } ?>
                 <br/><br/>
                 
                 <div align="center" id="pios"><?php
@@ -84,17 +96,7 @@
                 </div>
                 <br/><br/>
                 <p>Aún no tienes pios propios!</p> <?php
-            } 
-            
-            // $res = pg_query($con, "select usuario, id 
-                                   // from seguidos_v
-                                   // where seguidor_id = (select id
-                                                        // from usuarios
-                                                        // where usuario = '$usuario')");
-            // $num_rows = pg_num_rows($res);
-            
-            
-            
+            }
             
             pg_close();
         

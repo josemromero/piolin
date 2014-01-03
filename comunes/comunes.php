@@ -7,10 +7,10 @@
     
     function encabezado($top = false)
     {
-        $pre = ($top) ? '' : '../';
+        $pre = ($top) ? '' : '../usuarios/';
         
         if (!isset($_SESSION['usuario'])): 
-          header("Refresh: 2;url={$pre}usuarios/login.php"); ?>
+          header("Refresh: 2;url={$pre}login.php"); ?>
           <p>No te dejo entrar</p><?php          
           die();
         endif; 
