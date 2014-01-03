@@ -17,8 +17,14 @@
         
         $usuario = $_SESSION['usuario']; ?>
         
+        <p align="left"><h1>PIOLIN</h1></p>
+        
+        <form action="<?= $pre ?>buscar_usuario.php" method="post">
+            <input type="submit" value="Buscar usuarios" />
+        </form>
+        
         <form action="<?= $pre ?>logout.php" method="post">
-          <p align="right">Usuario: <?= $usuario ?>
+          <p align="right">Usuario: <a href="../tablon/index.php"><?= $usuario ?></a>
           <input type="submit" value="Cerrar" />
           </p>
         </form> <?php

@@ -63,10 +63,23 @@
                         <textarea maxlength="140" rows="4" cols="40" name="piar" ></textarea><br/>
                         <input type="submit" value="Enviar" />
                     </form>
-                </div> <?php
-                } ?>
-                <br/><br/>
-                
+                </div> 
+                <br/><br/> <?php
+                }
+                else 
+                {
+	                  $ress = pg_query($con, "select * from relaciones
+	                                         where seguidor_id = {$_SESSION['usuario_id']} and
+	                                         seguido_id = $id");
+	                  if (pg_num_rows($ress) > 0)
+                      { ?>
+                          <a href="../usuarios/dejar_de_seguir.php?usuario=<?= $id ?>">Dejar de seguir</a><?php
+                      }
+                      else
+                      { ?>
+                          <a href="../usuarios/seguir.php?usuario=<?= $id ?>">Seguir</a><?php    
+                      }
+                } ?>                
                 <div align="center" id="pios"><?php
                 
                 for ($i = 0; $i < $num_rows; $i++)
